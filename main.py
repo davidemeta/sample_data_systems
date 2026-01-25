@@ -62,3 +62,29 @@ for a, label in params1:
 axs[0].legend()
 axs[0].grid(True, alpha=0.3)
 axs[0].set_ylabel('Ampiezza')
+
+# --- Caso 2 ---
+axs[1].set_title(r'Caso 2: $P(s) = \frac{1}{s(s+a)}$', fontsize=12)
+params2 = [(2, 'a=2 (Stabile)'), (-0.5, 'a=-0.5 (Instabile)')]
+for a, label in params2:
+    num, den = get_discrete_sys_case2(a, T)
+    t, y = signal.dstep((num, den, T), n=n_steps)
+    axs[1].step(t, np.squeeze(y), where='post', label=label, linewidth=2)
+axs[1].legend()
+axs[1].grid(True, alpha=0.3)
+axs[1].set_ylabel('Ampiezza')
+
+# --- Caso 3 ---
+axs[2].set_title(r'Caso 3: $P(s) = \frac{s+b}{s(s+a)}$ (con $a=1$ fisso)', fontsize=12)
+params3 = [(2, 'b=2 (Fase Minima)'), (-2, 'b=-2 (Fase Non Minima - Undershoot)')]
+for b, label in params3:
+    num, den = get_discrete_sys_case3(1, b, T)
+    t, y = signal.dstep((num, den, T), n=n_steps)
+    axs[2].step(t, np.squeeze(y), where='post', label=label, linewidth=2)
+axs[2].legend()
+axs[2].grid(True, alpha=0.3)
+axs[2].set_ylabel('Ampiezza')
+axs[2].set_xlabel('Tempo (s)')
+
+plt.savefig('discrete_systems_analysis.png')
+plt.show()
