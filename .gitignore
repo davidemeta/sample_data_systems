@@ -1,0 +1,11 @@
+# Mac OS
+.DS_Store
+
+# Python - Bytecode compilato
+__pycache__/
+*.pyc
+
+# Ambienti virtuali (opzionale, ma consigliato se usi venv)
+venv/
+.venv/
+env/
